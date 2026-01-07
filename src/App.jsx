@@ -25,11 +25,169 @@ import {
   Zap,
   Activity,
   Navigation,
+  Sparkles,
+  Cloud,
+  Brush,
+  Settings,
+  ArrowUpCircle,
+  Database,
+  Download,
+  Briefcase,
+  Laptop,
+  Wifi,
+  Smartphone,
+  Headphones,
+  ShieldAlert,
+  Globe,
 } from 'lucide-react';
 
 // --- Constants ---
 const PHONE_NUMBER = '+918762358095';
 const PHONE_DISPLAY = '+91 87623 58095';
+
+// Services
+
+const ALL_SERVICES = [
+  {
+    icon: Sparkles,
+    title: 'Cleanup & Optimization',
+    description:
+      'Speed up your slow computer by removing junk files and optimizing settings.',
+  },
+  {
+    icon: Cloud,
+    title: 'Cloud Computing',
+    description:
+      'Setup and management of secure cloud storage and computing solutions.',
+  },
+  {
+    icon: Brush,
+    title: 'Computer Cleaning',
+    description:
+      'Physical deep cleaning of internal components to prevent overheating.',
+  },
+  {
+    icon: Settings,
+    title: 'Computer Customization',
+    description:
+      'Tailoring your OS and software environment to your specific workflow.',
+  },
+  {
+    icon: ArrowUpCircle,
+    title: 'Computer Upgrades',
+    description: 'Boost performance with new RAM, SSDs, or graphics cards.',
+  },
+  {
+    icon: Cpu,
+    title: 'Custom Computer Building',
+    description:
+      'High-performance rigs built from scratch for gaming or professional work.',
+  },
+  {
+    icon: Database,
+    title: 'Data Backup & Recovery',
+    description:
+      'Secure backups and professional retrieval of lost or corrupted data.',
+  },
+  {
+    icon: Download,
+    title: 'Hardware & Software Install',
+    description: 'Expert installation of new parts or complex software suites.',
+  },
+  {
+    icon: Briefcase,
+    title: 'IT Consulting',
+    description:
+      'Professional advice on upgrading your home or office tech infrastructure.',
+  },
+  {
+    icon: Laptop,
+    title: 'Mac Services',
+    description:
+      'Specialized diagnostics, repair, and software support for Apple devices.',
+  },
+  {
+    icon: Wifi,
+    title: 'Network & Print Setup',
+    description:
+      'Configuring home Wi-Fi networks and connecting wireless printers.',
+  },
+  {
+    icon: Smartphone,
+    title: 'Phone & Tablet Repair',
+    description:
+      'Screen fixes, battery replacements, and troubleshooting for mobile devices.',
+  },
+  {
+    icon: Headphones,
+    title: 'Service Support',
+    description:
+      'Ongoing technical support and troubleshooting for your devices.',
+  },
+  {
+    icon: ShieldAlert,
+    title: 'Virus & Malware Removal',
+    description:
+      'Detecting and eliminating security threats to keep your data safe.',
+  },
+  {
+    icon: Monitor,
+    title: 'Screen Replacement',
+    description:
+      'Replacing cracked or malfunctioning screens on laptops and mobiles.',
+  },
+  {
+    icon: Globe,
+    title: 'Web Design',
+    description:
+      'Modern, responsive websites tailored to build your brand and business online.',
+  },
+];
+
+const TESTIMONIALS = [
+  {
+    name: 'Nayana Shyam',
+    role: 'Local Resident',
+    stars: 5,
+    content:
+      'Helpful. The service was excellent and Mr. Nagendra explained everything clearly. Very happy with the repair.',
+  },
+  {
+    name: 'Rohan',
+    role: 'Customer',
+    stars: 5,
+    content:
+      'Best place for laptop service in Mangalore. Very professional and quick response. Highly recommended!',
+  },
+  {
+    name: 'Ashu',
+    role: 'Long-time Customer',
+    stars: 5,
+    content:
+      'Excellent service. I have been visiting for 5 years now for all my computer needs. Trustworthy and reliable.',
+  },
+  {
+    name: 'Priya Shetty',
+    role: 'Customer',
+    stars: 5,
+    content:
+      'Mr. Nagendra went above and beyond to fix my laptop. Very professional and friendly behavior. Truly appreciable.',
+  },
+  {
+    name: 'Rahul Kamath',
+    role: 'Gaming Enthusiast',
+    stars: 5,
+    content:
+      'I went in for a hardware upgrade. They provided high-quality components and the price was very reasonable compared to others.',
+  },
+  {
+    name: 'Karthik Bhat',
+    role: 'Business Owner',
+    stars: 5,
+    content:
+      'Quick resolution for my display issue. They identified the problem immediately and fixed it within a day.',
+  },
+];
 
 // --- Styles for Animation ---
 const animationStyles = `
@@ -878,12 +1036,23 @@ const App = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [bookingOpen, setBookingOpen] = useState(false);
   const [mapOpen, setMapOpen] = useState(false);
+  const [visibleServices, setVisibleServices] = useState(4); // Start with 4 services
+  const [visibleTestimonials, setVisibleTestimonials] = useState(3); // Start with 3
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const handleLoadMore = () => {
+    setVisibleServices((prev) => Math.min(prev + 4, ALL_SERVICES.length));
+  };
+
+  const handleLoadMoreTestimonials = () => {
+    // Show 3 more, but don't exceed the total length
+    setVisibleTestimonials((prev) => Math.min(prev + 3, TESTIMONIALS.length));
+  };
 
   return (
     <div className='min-h-screen bg-neutral-950 text-neutral-200 font-sans selection:bg-blue-500/30 selection:text-blue-200'>
@@ -1025,7 +1194,8 @@ const App = () => {
                 className='w-full sm:w-auto gap-2'
                 onClick={() => setBookingOpen(true)}
               >
-                Book Free Checkup <ArrowRight size={18} />
+                Book Repair
+                <ArrowRight size={18} />
               </Button>
               <Button
                 variant='secondary'
@@ -1063,27 +1233,23 @@ const App = () => {
             </div>
 
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6'>
-              <ServiceCard
-                icon={Wrench}
-                title='Laptop Repair'
-                description='Screen replacements, battery swaps, motherboard repairs, and hinge fixes for all major brands.'
-              />
-              <ServiceCard
-                icon={Monitor}
-                title='PC Performance'
-                description='Deep cleaning, thermal paste application, and bloatware removal to restore factory speed.'
-              />
-              <ServiceCard
-                icon={HardDrive}
-                title='OS & Software'
-                description='Clean Windows/Linux installations, driver updates, and essential software configuration.'
-              />
-              <ServiceCard
-                icon={Cpu}
-                title='Hardware Upgrade'
-                description='Give your machine a new life with SSD migration, RAM expansion, or a powerful new GPU.'
-              />
+              {ALL_SERVICES.slice(0, visibleServices).map((service, index) => (
+                <ServiceCard
+                  key={index}
+                  icon={service.icon}
+                  title={service.title}
+                  description={service.description}
+                />
+              ))}
             </div>
+
+            {visibleServices < ALL_SERVICES.length && (
+              <div className='text-center mt-12'>
+                <Button variant='secondary' onClick={handleLoadMore}>
+                  Load More Services <ChevronDown size={18} className='ml-2' />
+                </Button>
+              </div>
+            )}
           </FadeIn>
         </section>
 
@@ -1234,25 +1400,29 @@ const App = () => {
             </div>
 
             <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
-              <TestimonialCard
-                name='Nayana Shyam'
-                role='Local Resident'
-                stars={5}
-                content='Helpful. The service was excellent and Mr. Nagendra explained everything clearly. Very happy with the repair.'
-              />
-              <TestimonialCard
-                name='Rohan'
-                role='Customer'
-                stars={5}
-                content='Best place for laptop service in Mangalore. Very professional and quick response. Highly recommended!'
-              />
-              <TestimonialCard
-                name='Ashu'
-                role='Long-time Customer'
-                stars={5}
-                content='Excellent service. I have been visiting for 5 years now for all my computer needs. Trustworthy and reliable.'
-              />
+              {TESTIMONIALS.slice(0, visibleTestimonials).map(
+                (testimonial, index) => (
+                  <TestimonialCard
+                    key={index}
+                    name={testimonial.name}
+                    role={testimonial.role}
+                    stars={testimonial.stars}
+                    content={testimonial.content}
+                  />
+                )
+              )}
             </div>
+
+            {visibleTestimonials < TESTIMONIALS.length && (
+              <div className='text-center mt-12'>
+                <Button
+                  variant='secondary'
+                  onClick={handleLoadMoreTestimonials}
+                >
+                  Read More Stories <ChevronDown size={18} className='ml-2' />
+                </Button>
+              </div>
+            )}
           </FadeIn>
         </section>
 
