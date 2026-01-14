@@ -1076,8 +1076,13 @@ const App = () => {
             <div className='w-8 h-8 bg-blue-600 rounded-lg hidden items-center justify-center'>
               <Cpu className='text-white w-5 h-5' />
             </div>
-            <span className='text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-blue-600 tracking-tight'>
-              Aarya Technologies
+            <span className='text-xl font-bold tracking-tight'>
+              <span className='text-transparent bg-clip-text bg-orange-500'>
+                AARYA <span> </span>
+              </span>
+              <span className='text-white bg-neutral-800 px-1.5 py-0.5'>
+                TECHNOLOGIES
+              </span>
             </span>
           </div>
 
@@ -1369,9 +1374,7 @@ const App = () => {
                 </div>
                 <div className='bg-neutral-950 p-6 rounded-2xl border border-neutral-800 text-center hover:bg-neutral-800/80 transition-colors'>
                   <div className='text-4xl font-bold text-white mb-2'>5.0</div>
-                  <div className='text-neutral-500 text-sm'>
-                    JustDial Rating
-                  </div>
+                  <div className='text-neutral-500 text-sm'>Google Rating</div>
                 </div>
                 <div className='bg-neutral-950 p-6 rounded-2xl border border-neutral-800 text-center mt-8 hover:bg-neutral-800/80 transition-colors'>
                   <div className='text-4xl font-bold text-white mb-2'>
@@ -1547,8 +1550,13 @@ const App = () => {
               <div className='w-6 h-6 bg-blue-600 rounded hidden items-center justify-center'>
                 <Cpu className='text-white w-3 h-3' />
               </div>
-              <span className='font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-blue-600'>
-                Aarya Technologies
+              <span className='font-bold flex items-center gap-2'>
+                <span className='text-transparent bg-clip-text bg-orange-500 '>
+                  Aarya
+                </span>
+                <span className='text-white text-xs bg-neutral-800 px-2 py-0.5'>
+                  TECHNOLOGIES
+                </span>
               </span>
             </div>
             <p className='text-neutral-600 text-sm'>
